@@ -14,7 +14,7 @@ function renderToDom() {
   $('.results').empty();
 
   for (let x = 0; x < directory.length; x++) {
-    $('.results').append('<div class="card"><h3>' + directory[x].fullName + '</h3></div>');
+    $('.results').append('<div class="card"><h4>' + directory[x].fullName + '</h4><h4>' + directory[x].email + '</h4><h4>' + directory[x].phone + '</h4><button class="btn btn-sm w-10 mx-auto btn-danger">Delete</button></div>');
   }
 }
 
@@ -45,6 +45,13 @@ document.getElementById("mySubmit").addEventListener("click", function () {
 
     // SET ALL FIELDS = to original .val()
     renderToDom();
-
+    $("#firstName").remove();
+    $(".first-name-group").append('<input type="text" class="form-control" id="firstName" placeholder="Enter Here">');
+    $("#lastName").remove();
+    $(".last-name-group").append('<input type="text" class="form-control" id="lastName" placeholder="Enter Here">');
+    $("#eMail").remove();
+    $(".eMail-group").append('<input type="text" class="form-control" id="eMail" placeholder="name@email.com">');
+    $("#phoneNumber").remove();
+    $(".phone-group").append('<input type="text" class="form-control" id="phoneNumber" placeholder="123-867-5309">');
 
  });
