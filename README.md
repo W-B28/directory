@@ -6,5 +6,5 @@
 - HTML
 - CSS
 - Bootstrap
--Javascript 
--jQuery
+- Javascript 
+- jQuery
