@@ -1,9 +1,8 @@
 /* click event on submit button that captures fields
- click event on clear button that clears fields
+click event on clear button that clears fields
 submit button captures user entered values
 take all the values we collected, store them in a user object inside that click addEventListener
-
- */
+*/
 
 let directory = [];
 
@@ -13,37 +12,66 @@ let directory = [];
 function renderToDom() {
   $('.results').empty();
 
+// Card Injected to HTML
   for (let x = 0; x < directory.length; x++) {
-    $('.results').append('<div class="card"><h4>' + directory[x].fullName + '</h4><h4>' + directory[x].email + '</h4><h4>' + directory[x].phone + '</h4><button class="btn btn-sm w-10 mx-auto btn-danger">Delete</button></div>');
+    $('.results').append('<div class="card"> <h4>' + directory[x].fullName + '</h4> <h4>' + directory[x].email + '</h4><h4>' + directory[x].phone + '</h4> <button class="btn btn-sm w-10 mx-auto btn-danger delete-btn" id="'+x+'">Delete</button> </div>');
   }
 }
 
 // BUTTONS
 document.getElementById("myClear").addEventListener("click", function () {
-   $("#firstName").remove();
-   $(".first-name-group").append('<input type="text" class="form-control" id="firstName" placeholder="Enter Here">');
-   $("#lastName").remove();
-   $(".last-name-group").append('<input type="text" class="form-control" id="lastName" placeholder="Enter Here">');
-   $("#eMail").remove();
-   $(".eMail-group").append('<input type="text" class="form-control" id="eMail" placeholder="name@email.com">');
-   $("#phoneNumber").remove();
-   $(".phone-group").append('<input type="text" class="form-control" id="phoneNumber" placeholder="123-867-5309">');
- });
-
+  $("#firstName").remove();
+  $(".first-name-group").append('<input type="text" class="form-control" id="firstName" placeholder="Enter Here">');
+  $("#lastName").remove();
+  $(".last-name-group").append('<input type="text" class="form-control" id="lastName" placeholder="Enter Here">');
+  $("#eMail").remove();
+  $(".eMail-group").append('<input type="text" class="form-control" id="eMail" placeholder="name@email.com">');
+  $("#phoneNumber").remove();
+  $(".phone-group").append('<input type="text" class="form-control" id="phoneNumber" placeholder="123-867-5309">');
+});
+// SUBMIT
 document.getElementById("mySubmit").addEventListener("click", function () {
-   let userInputtedFirstName = $("#firstName").val();
-   let userInputtedLastName = $("#lastName").val();
-   let userInputtedeMail = $("#eMail").val();
-   let userInputtedPhoneNumber = $("#phoneNumber").val();
+  let userInputtedFirstName = $("#firstName").val();
+  let userInputtedLastName = $("#lastName").val();
+  let userInputtedeMail = $("#eMail").val();
+  let userInputtedPhoneNumber = $("#phoneNumber").val();
+
+  // are all fields filled in?
+  if (userInputtedFirstName === "" || userInputtedLastName === "" || userInputtedeMail === "" || userInputtedPhoneNumber === "" ) {
+    alert("Fill in all of the fields please :)")
+    return null;
+  }
+
+  // if valid email?
+  //  validating with regEx
+
+
+
+  // does phone number have correct number of digits & characters
+
+  let numberArr = ['0','1', '2', '3','4','5','6','7','8','9'];
+  let tempStr = "";
+
+  for (let x = 0; x < userInputtedPhoneNumber.length; x++) {
+
+    if (numberArr.indexOf(userInputtedPhoneNumber[x]) > -1) {
+      tempStr += userInputtedPhoneNumber[x];
+    }
+  };
+
+  if (tempStr.length !== 10) {
+    alert("Please Enter Your Ten Digit Phone Number");
+    return null;
+  }
 
     let tempObj = {};
     tempObj.fullName = userInputtedFirstName + " " + userInputtedLastName;
     tempObj.email = userInputtedeMail;
-    tempObj.phone = userInputtedPhoneNumber;
+    tempObj.phone = tempStr;
 
     directory.push(tempObj);
 
-    // SET ALL FIELDS = to original .val()
+    // Clear Button to SET ALL FIELDS = to original.val()
     renderToDom();
     $("#firstName").remove();
     $(".first-name-group").append('<input type="text" class="form-control" id="firstName" placeholder="Enter Here">');
@@ -54,4 +82,13 @@ document.getElementById("mySubmit").addEventListener("click", function () {
     $("#phoneNumber").remove();
     $(".phone-group").append('<input type="text" class="form-control" id="phoneNumber" placeholder="123-867-5309">');
 
- });
+  });
+
+  // Remove card button
+
+  $(".results").on("click", ".delete-btn", function(e) {
+    // go into click event, target.[id], splice directory, call render function
+    const deleteID = e.target.id;
+    directory.splice(deleteID, 1);
+    renderToDom();
+  });
