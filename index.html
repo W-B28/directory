@@ -10,6 +10,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
+
   <!-- scripts -->
   <!-- font awesome -->
   <script src="https://kit.fontawesome.com/daa0aaa999.js"></script>
@@ -21,12 +22,12 @@
       <span class="directory text-center"style="font-size: 3em;">
         <i class="far fa-address-book text-center mx-auto"></i> Directory
       </span>
-      <h1 class="text-right mx-auto">Results</h1>
+      <h2 class="text-right">Results</h2>
     </div>
 
     <div class="container-form-card">
       <div class="row">
-        <div class="col-6">
+        <div class="col-5">
           <form class="forms" action="index.html" method="post">
             <div class="form-group first-name-group">
               <label for="formGroupExampleInput">First Name</label>
@@ -34,27 +35,29 @@
             </div>
             <div class="form-group last-name-group">
               <label for="formGroupExampleInput2">Last Name</label>
-              <input type="text" class="form-control" id="lastName" value="" placeholder="Enter Here">
+              <input type="text" class="form-control" id="lastName" value="" placeholder="Enter Here"><br>
             </div>
             <div class="form-group eMail-group">
               <label for="formGroupExampleInput">Email</label>
-              <input type="text" class="form-control" id="eMail" value="" placeholder="name@email.com">
+              <input type="text" class="form-control" id="eMail" onkeyup="validateEmail()" value="" placeholder="name@email.com">
+              <!-- <label class="error" id="eMailPrompt">error</label> -->
             </div>
             <div class="form-group phone-group">
               <label for="formGroupExampleInput2">Phone Number</label>
               <input type="text" class="form-control" id="phoneNumber" value="" placeholder="123-867-5309">
+              <!-- <label class="error" id="phoneNumberPrompt">error</label> -->
             </div>
           </form>
 
           <div class="button">
-            <button type="button" id="myClear" class="btn btn-warning mr-5">Clear</button>
+            <button type="button" id="myClear" class="btn btn-warning mx-auto">Clear</button>
             <button type="button" id="mySubmit" class="btn btn-success">Submit</button>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-7">
           <div class="results container">
             <div class="card">
-
+              <!-- Point of JS Injection -->
             </div>
           </div>
         </div>

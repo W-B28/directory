@@ -12,13 +12,25 @@ let directory = [];
 function renderToDom() {
   $('.results').empty();
 
+  for (let x = 0; x < directory.length; x++) {
+
+    for (let y = 0; y < directory.length-1; y++) {
+      console.log(y);
+      if (directory[y]['last'] > directory[y+1]['last']) {
+        let tempVal = directory[y];
+        directory[y] = directory[y+1];
+        directory[y+1] = tempVal;
+      }
+    }
+  }
+  console.log(directory);
 // Card Injected to HTML
   for (let x = 0; x < directory.length; x++) {
     $('.results').append('<div class="card"> <h4>' + directory[x].fullName + '</h4> <h4>' + directory[x].email + '</h4><h4>' + directory[x].phone + '</h4> <button class="btn btn-sm w-10 mx-auto btn-danger delete-btn" id="'+x+'">Delete</button> </div>');
   }
 }
 
-// BUTTONS
+// BUTTONS - Clear
 document.getElementById("myClear").addEventListener("click", function () {
   $("#firstName").remove();
   $(".first-name-group").append('<input type="text" class="form-control" id="firstName" placeholder="Enter Here">');
@@ -29,22 +41,48 @@ document.getElementById("myClear").addEventListener("click", function () {
   $("#phoneNumber").remove();
   $(".phone-group").append('<input type="text" class="form-control" id="phoneNumber" placeholder="123-867-5309">');
 });
-// SUBMIT
+//BUTTONS - SUBMIT
 document.getElementById("mySubmit").addEventListener("click", function () {
-  let userInputtedFirstName = $("#firstName").val();
-  let userInputtedLastName = $("#lastName").val();
+  let userInputtedFirstName = $("#firstName").val().toLowerCase().split('');
+  userInputtedFirstName[0] = userInputtedFirstName[0].toUpperCase();
+  userInputtedFirstName = userInputtedFirstName.join('');
+
+  let userInputtedLastName = $("#lastName").val().toLowerCase().split('');
+  userInputtedLastName[0] = userInputtedLastName[0].toUpperCase();
+  userInputtedLastName = userInputtedLastName.join('');
+
   let userInputtedeMail = $("#eMail").val();
+
   let userInputtedPhoneNumber = $("#phoneNumber").val();
 
   // are all fields filled in?
   if (userInputtedFirstName === "" || userInputtedLastName === "" || userInputtedeMail === "" || userInputtedPhoneNumber === "" ) {
-    alert("Fill in all of the fields please :)")
+    alert("Fill In All Fields Please :)");
     return null;
   }
 
+if (validateEmail(userInputtedeMail) === false) {
+  return null;
+}
   // if valid email?
   //  validating with regEx
+  // if userInputtedeMail does not include @
+//   function matcheMail() {
+//
+function validateEmail (str) {
 
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(str)) {
+        return true;
+    } else {
+        alert("Please Enter Valid Email Address");
+      return false;
+
+
+    }
+  }
+    // if (userInputtedeMailVal !== resultRegEx) {
+    //   return null;
+    // }
 
 
   // does phone number have correct number of digits & characters
@@ -68,6 +106,8 @@ document.getElementById("mySubmit").addEventListener("click", function () {
     tempObj.fullName = userInputtedFirstName + " " + userInputtedLastName;
     tempObj.email = userInputtedeMail;
     tempObj.phone = tempStr;
+    tempObj.first = userInputtedFirstName;
+    tempObj.last = userInputtedLastName;
 
     directory.push(tempObj);
 
