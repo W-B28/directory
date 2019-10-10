@@ -1,6 +1,6 @@
 # Directory
 
-- A single page CRUD application for data manipulation :)
+- A rudimentary single page CRUD application for data manipulation :)
 
 ## Tech Stack
 - HTML
