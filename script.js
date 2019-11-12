@@ -26,7 +26,7 @@ function renderToDom() {
   console.log(directory);
 // Card Injected to HTML
   for (let x = 0; x < directory.length; x++) {
-    $('.results').append('<div class="card"> <h4>' + directory[x].fullName + '</h4> <h4>' + directory[x].email + '</h4><h4>' + directory[x].phone + '</h4> <button class="btn btn-sm w-10 mx-auto btn-danger delete-btn" id="'+x+'">Delete</button> </div>');
+    $('.results').append('<div class="card"> <h4>' + directory[x].fullName + '</h4> <h4>' + directory[x].email + '</h4><h4>' + directory[x].phone + '</h4> <button class="btn btn-sm w-10 mx-auto btn-danger delete-btn mb-2" id="'+x+'">Delete</button> </div>');
   }
 }
 

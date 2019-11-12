@@ -1,6 +1,7 @@
 .card {
-  border-radius: 2.5%;
-  border: dotted;
+  border-radius: 1%;
+  border: solid;
+  border-width: thin;
   text-align: center;
-  margin: 0.25em;
+  margin: 0.2em;
 };
